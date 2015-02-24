@@ -1,6 +1,9 @@
 #include "Maze.h"
 #include "Color.h"
 #include "Rect.h"
+#include "Cell.h"
+#include "StackLinked.h"
+#include "NextNode.h"
 
 #include <windows.h>  //for the sleep function
 
@@ -46,20 +49,16 @@ Cell* Maze::processBackTrack(StackLinked<Cell>* stack)
    //top_cell is NULL if the stack is empty
    //top_cell's direction is DEAD_END if you need to keep backtracking
 
-   while (top_cell = DEAD_END)  //need to back track
+   while (top_cell->getDir() == DEAD_END)  //need to back track
    {
-      
-	   top_cell->pop();
 
-	   mz.location = BACKTRACK;
-
+	   
       //remove the cell and set the maze location to BACKTRACK (the maze is a Matrix)
 
 
 
       //look at the next cell
 
-	   top_cell = stack->peek();
 
 
 
@@ -78,7 +77,7 @@ bool Maze::isSolved(Cell* curr_cell, StackLinked<Cell>* stack)
 
 
    //have you solved the maze? (check that we are at the bottom right maze location and that it is a SPACE
-   if ()  
+   if ()
    {
 
 
@@ -102,7 +101,7 @@ void Maze::processSolution(StackLinked<Cell>* stack)
 {
    //DO THIS
    //the stack has the solution path stored
-   while(                    )
+   while()
    {
       //get the next cell from the stack
 
@@ -150,11 +149,11 @@ bool Maze::traverse()
 
       //DO THIS
       //get the row and col from curr_cell
-      int row = 
-      int col = 
+      int row = ;
+      int col = ;
 
       //check that the current maze location corresponds to SPACE, otherwise delete it
-      if (                                           )
+      if ()
       {
          //update the maze location to TRIED
          //put the cell on the stack (move forward through the maze)
