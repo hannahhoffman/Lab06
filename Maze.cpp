@@ -82,19 +82,19 @@ bool Maze::isSolved(Cell* curr_cell, StackLinked<Cell>* stack)
    if (row == height && col == width && val == SPACE)
    {
 
-
       //set the maze location to TRIED
 	   maze->setElement(height, width, TRIED);
 
       //push curr_cell
+	   stack->push(curr_cell);
 
 
       gui->update();
       //return the appropriate boolean
-
+	  return true;
    }
 
-
+   return false;
    //return the appropriate boolean
 }
 
