@@ -71,7 +71,7 @@ T* StackLinked<T>::peek()
 	   return NULL;
 
 
-   return top;
+   return top->getItem();
 }
 
 template < class T >
