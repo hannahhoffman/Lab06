@@ -103,16 +103,18 @@ void Maze::processSolution(StackLinked<Cell>* stack)
 {
    //DO THIS
    //the stack has the solution path stored
-   while()
+
+	Cell* curr_cell = stack->peek();
+
+   while(isSolved(curr_cell, stack))
    {
       //get the next cell from the stack
 
-
+	   curr_cell->nextCell();
       
       //update the maze location to PATH
 
-
-
+	   maze->setElement(height, width, PATH);
 
       gui->update();
    }
@@ -139,7 +141,7 @@ bool Maze::traverse()
 
       //call a method in the Cell class to give you a new Cell in a new direction relative to top_cell (initially, DOWN)
       //DO THIS
-      Cell* curr_cell = 
+      Cell* curr_cell = ;
 
 
 
@@ -151,19 +153,18 @@ bool Maze::traverse()
 
       //DO THIS
       //get the row and col from curr_cell
-      int row = ;
-      int col = ;
+      int row = curr_cell->getRow();
+      int col = curr_cell->getCol();
 
       //check that the current maze location corresponds to SPACE, otherwise delete it
-      if ()
+      if (maze->getElement(height, width) == SPACE)
       {
          //update the maze location to TRIED
          //put the cell on the stack (move forward through the maze)
+		  maze->setElement(height, width, TRIED);
 
-
-
-
-
+		  stack->push(curr_cell);
+		  curr_cell->nextCell();
 
 
          Sleep(75);  //slow down the maze traversal
@@ -173,6 +174,7 @@ bool Maze::traverse()
       {
          //DO THIS
          //delete the cell
+		  delete curr_cell;
 
 
       }
