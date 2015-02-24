@@ -52,13 +52,14 @@ Cell* Maze::processBackTrack(StackLinked<Cell>* stack)
    while (top_cell->getDir() == DEAD_END)  //need to back track
    {
 	   top_cell = stack->pop();
-	   
+	   maze->setElement(height, width, BACKTRACK);
 
       //remove the cell and set the maze location to BACKTRACK (the maze is a Matrix)
 
 	   top_cell = top_cell->nextCell();
 	   top_cell = stack->peek();
-      //look at the next cell
+
+	   //look at the next cell
 
 	   
       Sleep(75);      //slow down the maze traversal
@@ -83,7 +84,7 @@ bool Maze::isSolved(Cell* curr_cell, StackLinked<Cell>* stack)
 
 
       //set the maze location to TRIED
-
+	   maze->setElement(height, width, TRIED);
 
       //push curr_cell
 
