@@ -3,6 +3,8 @@
 
 #include "NextNode.h"
 
+#include <iostream>
+
 template < class T >
 class StackLinked
 {
@@ -70,7 +72,6 @@ T* StackLinked<T>::peek()
 	if (sze == 0)
 	   return NULL;
 
-
    return top->getItem();
 }
 
@@ -90,14 +91,14 @@ T* StackLinked<T>::pop()
    if (sze == 0)
 	   return NULL;
 
-   //DO THIS
-
    NextNode<T>* node = top->getNext();
+   T* item = top->getItem();
    delete top;
    top = node;
 
    sze--;
-
+   
+   return item;
 }
 
 #endif
