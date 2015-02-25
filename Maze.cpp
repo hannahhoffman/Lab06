@@ -51,7 +51,8 @@ Cell* Maze::processBackTrack(StackLinked<Cell>* stack)
    //top_cell is NULL if the stack is empty
    //top_cell's direction is DEAD_END if you need to keep backtracking
 
-   while (top_cell->getDir() == DEAD_END && top_cell != NULL)  //need to back track
+
+   while (top_cell && top_cell->getDir() == DEAD_END)  //need to back track
    {
 	   row = top_cell->getRow();
 	   col = top_cell->getCol();
@@ -59,16 +60,17 @@ Cell* Maze::processBackTrack(StackLinked<Cell>* stack)
       //remove the cell and set the maze location to BACKTRACK (the maze is a Matrix)
 	   top_cell = stack->pop();
 	   maze->setElement(row, col, BACKTRACK);
+		delete top_cell;
 
 
 	   //look at the next cell
-	   top_cell = top_cell->nextCell();
+
 	   top_cell = stack->peek();
 	   
       Sleep(75);      //slow down the maze traversal
       gui->update();  //update whenever the color of a cell has been changed
-   }
 
+   }
    return top_cell;
 }
 
@@ -111,11 +113,11 @@ void Maze::processSolution(StackLinked<Cell>* stack)
 	int row;
 	int col;
 
-   while(isSolved(curr_cell, stack))
+   while(!stack->isEmpty())
    {
       //get the next cell from the stack
 
-	   curr_cell->nextCell();
+	   curr_cell = stack->pop();
       
       //update the maze location to PATH
 
@@ -141,7 +143,8 @@ bool Maze::traverse()
 
    Cell* start_cell = new Cell(1, 1);
    stack.push(start_cell);  //start from the top left corner
-   cout << " Empty: "<<stack.isEmpty();
+   cout << " Empty: "<<stack.isEmpty()<<"\n";
+
    while(!stack.isEmpty())
    {
       Cell* top_cell = processBackTrack(&stack);
@@ -152,9 +155,8 @@ bool Maze::traverse()
 
       Cell* curr_cell = top_cell->nextCell();
 
+      //does this new Cell solve the maze?
 
-
-      //does this new Cell solve the maze?\
       done = isSolved(curr_cell, &stack);
       if (done) break;
 
@@ -171,7 +173,7 @@ bool Maze::traverse()
 
 		//put the cell on the stack (move forward through the maze)
 		  stack.push(curr_cell);
-		  curr_cell->nextCell();
+		  
 
 
          Sleep(75);  //slow down the maze traversal
