@@ -154,7 +154,7 @@ bool Maze::traverse()
 
 
 
-      //does this new Cell solve the maze?
+      //does this new Cell solve the maze?\
       done = isSolved(curr_cell, &stack);
       if (done) break;
 
@@ -167,9 +167,9 @@ bool Maze::traverse()
       if (maze->getElement(row, col) == SPACE)
       {
          //update the maze location to TRIED
-         //put the cell on the stack (move forward through the maze)
 		  maze->setElement(row, col, TRIED);
 
+		//put the cell on the stack (move forward through the maze)
 		  stack.push(curr_cell);
 		  curr_cell->nextCell();
 
@@ -180,6 +180,7 @@ bool Maze::traverse()
       else //look for a different route 
       {
          //DO THIS
+		  
 
 
          //delete the cell
